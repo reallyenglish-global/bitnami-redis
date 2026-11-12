@@ -9,8 +9,8 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
       org.opencontainers.image.created="2026-11-06T05:37:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/redis/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redis" \
+      org.opencontainers.image.documentation="https://github.com/reallyenglish-global/bitnami-redis/tree/main/bitnami-redis" \
+      org.opencontainers.image.source="https://github.com/reallyenglish-global/bitnami-redis/tree/main/bitnami-redis" \
       org.opencontainers.image.title="redis" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="8.10.3"

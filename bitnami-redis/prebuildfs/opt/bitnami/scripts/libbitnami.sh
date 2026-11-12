@@ -48,4 +48,3 @@ print_image_welcome_page() {
     info "${BOLD}Welcome to the Bitnami ${BITNAMI_APP_NAME} container${RESET}"
     info ""
 }
-
