@@ -1,24 +1,36 @@
-# Bitnami Redis container
+# ReallyEnglish Bitnami Redis images
 
-This repository contains the Bitnami Redis 8.10.3 Debian 12 container build context, extracted from [`reallyenglish-global/containers`](https://github.com/reallyenglish-global/containers/tree/main/bitnami/redis/8.10/debian-12) at source commit `2c19a2ed4cfb6f2a23ac69ec74ee09d68dbfcc25`.
+This repository maintains separate build contexts for the Redis family. Each component lives in its own directory so additional upstream containers can be added without sharing image files or startup scripts.
 
-The Dockerfile and supporting build files are licensed under Apache-2.0; see [`LICENSE.md`](LICENSE.md) and the upstream notices. Redis is built from Bitnami's versioned downloads and checksum-verified during the image build.
+## Components
 
-## Build locally
+- [`bitnami-redis/`](bitnami-redis/README.md) — Redis server, version `8.10.3-debian-12-r1`.
+- [`bitnami-sentinel/`](bitnami-sentinel/README.md) — Redis Sentinel, version `8.10.3-debian-12-r1`.
+
+The GitHub Actions workflow builds both contexts for `linux/amd64` and `linux/arm64`. Pull requests and non-default-branch runs build without publishing. Pushes to `main` and manual runs on the default branch publish each image to GHCR with its version, commit-SHA, and `latest` tags. Keep the `version` entries in the workflow matrix aligned with each component's `VERSION` file and Dockerfile.
+
+After the first successful publication, set each GHCR package's visibility to **Public** in GitHub package settings if unauthenticated public pulls are intended. Newly created packages may default to private; local builds do not publish or change package visibility.
+
+## Local Redis build
+
+From the repository root, build and load the native-architecture image into the local Docker engine:
 
 ```sh
-docker buildx build --platform linux/amd64,linux/arm64 -t bitnami-redis:local .
+docker buildx build --tag ghcr.io/reallyenglish-global/bitnami-redis:8.10.3-debian-12-r1 --load bitnami-redis/
 ```
 
-## GitHub Actions / image
+This builds locally and does not publish the image.
 
-Pull requests build both supported architectures without publishing. Pushes to `main` and manual workflow runs build and publish to GitHub Container Registry using the repository-scoped `GITHUB_TOKEN` (no external registry secret required).
+## Local Sentinel build
 
-After the first successful publication, set the GHCR package visibility to **Public** in the package settings (or through the GitHub Packages API). Image reference:
+From the repository root, build and load the native-architecture image into the local Docker engine:
 
-```text
-ghcr.io/reallyenglish-global/bitnami-redis:latest
-ghcr.io/reallyenglish-global/bitnami-redis:sha-<short-commit-sha>
+```sh
+docker buildx build --tag ghcr.io/reallyenglish-global/bitnami-sentinel:8.10.3-debian-12-r1 --load bitnami-sentinel/
 ```
 
-Tags are immutable commit identifiers plus `latest` on the default branch.
+This builds locally and does not publish the image. For both supported architectures, use the GitHub Actions build workflow.
+
+## Licensing and provenance
+
+The repository-level [`LICENSE.md`](LICENSE.md) and component-specific upstream notices apply. Sentinel source provenance and local changes are recorded in [`bitnami-sentinel/UPSTREAM.md`](bitnami-sentinel/UPSTREAM.md).

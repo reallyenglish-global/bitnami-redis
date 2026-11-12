@@ -18,7 +18,7 @@ set -o pipefail
 
 print_welcome_page
 
-# We add the copy from default config in the entrypoint to not break users 
+# We add the copy from default config in the entrypoint to not break users
 # bypassing the setup.sh logic. If the file already exists do not overwrite (in
 # case someone mounts a configuration file in /opt/bitnami/redis/etc)
 debug "Copying files from $REDIS_DEFAULT_CONF_DIR to $REDIS_CONF_DIR"
